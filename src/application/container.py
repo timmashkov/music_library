@@ -1,0 +1,52 @@
+from redis.asyncio import Redis
+
+from adapters.auth.token_adapter import TokenAdapter
+from adapters.broker.rabbit_adapter import RabbitMQAdapter
+from adapters.database.alchemy_adapter import AlchemyAdapter
+from application.config import settings
+from application.processes.consume_process import BrokerProcessManager
+from infrastructure.common.base_entities.singleton import OnlyContainer, Singleton
+
+
+class Container(Singleton):
+
+    redis = OnlyContainer(
+        Redis,
+        **settings.REDIS,
+        decode_responses=True,
+    )
+
+    alchemy_manager = OnlyContainer(
+        AlchemyAdapter,
+        dialect=settings.POSTGRES.dialect,
+        host=settings.POSTGRES.host,
+        login=settings.POSTGRES.login,
+        password=settings.POSTGRES.password,
+        port=settings.POSTGRES.port,
+        database=settings.POSTGRES.database,
+        echo=settings.POSTGRES.echo,
+    )
+
+    rabbit_manager = OnlyContainer(
+        RabbitMQAdapter,
+        **settings.RABBIT_MQ,
+        queue_list=settings.RABBIT_ROUTING_KEYS,
+    )
+
+    token_manager = OnlyContainer(
+        TokenAdapter,
+        secret=settings.AUTH.secret,
+        exp=settings.AUTH.expiration,
+        api_x_key_header=settings.AUTH.api_x_key_header,
+        iterations=settings.AUTH.iterations,
+        hash_name=settings.AUTH.hash_name,
+        formats=settings.AUTH.formats,
+        algorythm=settings.AUTH.algorythm,
+        redis_client=redis(),
+    )
+
+    broker_process_manager = OnlyContainer(
+        BrokerProcessManager,
+        broker=rabbit_manager(),
+        queues=settings.RABBIT_ROUTING_KEYS,
+    )
