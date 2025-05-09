@@ -5,6 +5,8 @@ from adapters.broker.rabbit_adapter import RabbitMQAdapter
 from adapters.database.alchemy_adapter import AlchemyAdapter
 from application.config import settings
 from application.processes.consume_process import BrokerProcessManager
+from domain.template_domain.repositories.read_repository import TemplateReadRepository
+from domain.template_domain.repositories.write_repository import TemplateWriteRepository
 from infrastructure.common.base_entities.singleton import OnlyContainer, Singleton
 
 
@@ -49,4 +51,14 @@ class Container(Singleton):
         BrokerProcessManager,
         broker=rabbit_manager(),
         queues=settings.RABBIT_ROUTING_KEYS,
+    )
+
+    template_read_manager = OnlyContainer(
+        TemplateReadRepository,
+        session_adapter=alchemy_manager(),
+    )
+
+    template_write_manager = OnlyContainer(
+        TemplateWriteRepository,
+        session_adapter=alchemy_manager(),
     )

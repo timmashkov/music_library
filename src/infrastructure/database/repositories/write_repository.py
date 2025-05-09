@@ -4,9 +4,7 @@ from sqlalchemy import delete, insert, update
 from sqlalchemy.ext.asyncio import async_sessionmaker
 
 from adapters.database.alchemy_adapter import AlchemyAdapter
-from infrastructure.common.interfaces.repository_interfaces import (
-    AbstractWriteRepository,
-)
+from infrastructure.common.interfaces.repository_interfaces import AbstractWriteRepository
 from infrastructure.database.models import Base
 
 

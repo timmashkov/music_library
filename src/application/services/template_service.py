@@ -6,10 +6,7 @@ from fastapi import Depends
 from application.container import Container
 from domain.template_domain.entities.model import TemplateIncomingData
 from infrastructure.common.base_entities.singleton import Singleton
-from infrastructure.common.interfaces.repository_interfaces import (
-    AbstractReadRepository,
-    AbstractWriteRepository,
-)
+from infrastructure.common.interfaces.repository_interfaces import AbstractReadRepository, AbstractWriteRepository
 
 
 class TemplateService(Singleton):

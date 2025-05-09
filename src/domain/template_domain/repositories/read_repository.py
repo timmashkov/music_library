@@ -1,9 +1,7 @@
 from typing import Optional
 
 from adapters.database.alchemy_adapter import AlchemyAdapter
-from domain.template_domain.interfaces.read_repository_interface import (
-    TemplateReadRepositoryInterface,
-)
+from domain.template_domain.interfaces.read_repository_interface import TemplateReadRepositoryInterface
 from infrastructure.database.models import Template
 from infrastructure.database.repositories.read_repository import ReadRepository
 

@@ -6,11 +6,7 @@ from fastapi_filter import FilterDepends
 from pydantic import BaseModel
 
 from application.services.template_service import TemplateService
-from domain.template_domain.entities.model import (
-    TemplateFilter,
-    TemplateIncomingData,
-    TemplateResultData,
-)
+from domain.template_domain.entities.model import TemplateFilter, TemplateIncomingData, TemplateResultData
 from infrastructure.common.interfaces.router_interface import AbstractRouter
 
 
