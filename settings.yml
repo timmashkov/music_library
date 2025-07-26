@@ -6,20 +6,6 @@ default:
   FAST_API_PATH: src.application.application:template_app
   LOG_LEVEL: info
   RELOADED: True
-  AUTH:
-    secret: secret
-    expiration: 3600
-    iterations: 1000
-    hash_name: hash_name
-    formats: formats-8
-    algorythm: algorythm
-    api_x_key_header: api_x_key_header
-  COOKIE:
-    cookie_key: cookie_key
-    expiration: 3600
-    same_site: lax
-    httponly: True
-    secure: False
   POSTGRES:
     dialect: asyncpg
     host: localhost
@@ -33,17 +19,3 @@ default:
     pool_max_size: 20
     pool_timeout: 90
     mat_view_time: 15
-  REDIS:
-    host: localhost
-    port: 6379
-    password: password
-    db: 0
-  RABBIT_MQ:
-    host: localhost
-    port: 5123
-    login: login
-    password: password
-    protocol: amqp
-    timeout: 20
-  RABBIT_ROUTING_KEYS:
-    routing_key: routing_key

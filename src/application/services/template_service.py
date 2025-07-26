@@ -1,9 +1,9 @@
 from typing import Any, Union
 from uuid import UUID
 
+from application.container import Container
 from fastapi import Depends
 
-from application.container import Container
 from domain.template_domain.entities.model import TemplateIncomingData
 from infrastructure.common.base_entities.singleton import Singleton
 from infrastructure.common.interfaces.repository_interfaces import AbstractReadRepository, AbstractWriteRepository
@@ -12,9 +12,9 @@ from infrastructure.common.interfaces.repository_interfaces import AbstractReadR
 class TemplateService(Singleton):
     def __init__(
         self,
-        read_repository: AbstractReadRepository = Depends(Container.order_read_manager),
+        read_repository: AbstractReadRepository = Depends(Container.template_read_manager),
         write_repository: AbstractWriteRepository = Depends(
-            Container.order_write_manager
+            Container.template_write_manager
         ),
     ) -> None:
         self.read_repository = read_repository

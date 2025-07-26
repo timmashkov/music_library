@@ -36,5 +36,5 @@ class Base(DeclarativeBase):
         comment="Дата обновления",
     )
 
-    def as_dict(self):
+    def as_dict(self) -> dict:
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}

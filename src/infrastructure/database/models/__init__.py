@@ -1,4 +1,4 @@
 from .base import Base
-from .template import Template
+from .artist import Artist
 
-__all__: tuple[str] = ("Base", "Template")
+__all__: tuple[str] = ("Base", "Artist")
