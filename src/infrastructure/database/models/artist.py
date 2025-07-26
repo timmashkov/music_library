@@ -1,6 +1,12 @@
-from infrastructure.database.models import Base
+import typing
+
 from sqlalchemy import String, Text
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
+
+from infrastructure.database.models.base import Base
+
+if typing.TYPE_CHECKING:
+    from infrastructure.database.models import Album
 
 
 class Artist(Base):
@@ -11,4 +17,13 @@ class Artist(Base):
     bio: Mapped[str | None] = mapped_column(Text, comment="Artist's biography")
     image_url: Mapped[str | None] = mapped_column(
         String, comment="Image's url in minio"
+    )
+
+    albums: Mapped[typing.List["Album"]] = relationship(
+        "Album",
+        back_populates="artist",
+        cascade="all, delete-orphan",
+        passive_updates=True,
+        passive_deletes=True,
+        lazy="noload",
     )

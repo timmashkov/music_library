@@ -1,12 +1,13 @@
 from typing import Any, Optional
 
+from sqlalchemy import delete, insert, update
+from sqlalchemy.ext.asyncio import async_sessionmaker
+
 from adapters.database.alchemy_adapter import AlchemyAdapter
 from infrastructure.common.interfaces.repository_interfaces import (
     AbstractWriteRepository,
 )
 from infrastructure.database.models import Base
-from sqlalchemy import delete, insert, update
-from sqlalchemy.ext.asyncio import async_sessionmaker
 
 
 class WriteRepository(AbstractWriteRepository):

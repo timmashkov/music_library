@@ -2,8 +2,9 @@ from abc import ABC, abstractmethod
 from typing import Any
 
 from fastapi import APIRouter
-from infrastructure.common.base_entities.patched_filter import PatchedFilter
 from pydantic import BaseModel
+
+from infrastructure.common.base_entities.patched_filter import PatchedFilter
 
 
 class AbstractRouter(ABC):

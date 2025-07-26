@@ -1,6 +1,7 @@
-from infrastructure.common.base_entities.singleton import Singleton
 from sqlalchemy import AsyncAdaptedQueuePool, Pool
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
+
+from infrastructure.common.base_entities.singleton import Singleton
 
 
 class AlchemyAdapter(Singleton):

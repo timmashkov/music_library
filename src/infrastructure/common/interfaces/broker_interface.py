@@ -1,11 +1,12 @@
 from abc import ABC, abstractmethod
 from typing import Any, Callable, Union
 
+from orjson import dumps, loads
+
 from infrastructure.common.exceptions.serialize_exceptions import (
     DeserializationError,
     SerializationError,
 )
-from orjson import dumps, loads
 
 
 class AbstractBroker(ABC):
