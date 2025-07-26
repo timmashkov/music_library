@@ -5,10 +5,9 @@ from adapters.auth.cookie_adapter import CookieAdapter
 from adapters.auth.token_adapter import TokenAdapter
 from application.container import Container
 from application.interactors.authenticate import Authenticate
+from application.services.template_service import TemplateService
 from domain.auth.entities.enums import AuthOptions
 from fastapi import Depends, Response
-
-from application.services.template_service import TemplateService
 
 
 class AuthInteractorFactory:

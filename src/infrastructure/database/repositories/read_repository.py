@@ -1,12 +1,13 @@
 from typing import Any, Optional, Union
 from uuid import UUID
 
+from adapters.database.alchemy_adapter import AlchemyAdapter
+from infrastructure.common.interfaces.repository_interfaces import (
+    AbstractReadRepository,
+)
+from infrastructure.database.models import Base
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import async_sessionmaker
-
-from adapters.database.alchemy_adapter import AlchemyAdapter
-from infrastructure.common.interfaces.repository_interfaces import AbstractReadRepository
-from infrastructure.database.models import Base
 
 
 class ReadRepository(AbstractReadRepository):

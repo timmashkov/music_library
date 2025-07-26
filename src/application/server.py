@@ -4,7 +4,6 @@ from contextlib import asynccontextmanager
 from typing import AsyncContextManager, Optional
 
 from fastapi import APIRouter, FastAPI
-
 from infrastructure.common.base_entities.singleton import Singleton
 
 
