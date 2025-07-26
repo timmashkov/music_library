@@ -1,8 +1,7 @@
-from application.config import settings
-
 from adapters.database.alchemy_adapter import AlchemyAdapter
-from domain.template_domain.repositories.read_repository import TemplateReadRepository
-from domain.template_domain.repositories.write_repository import TemplateWriteRepository
+from application.config import settings
+from domain.artist.repositories.read_repository import ArtistReadRepository
+from domain.artist.repositories.write_repository import ArtistWriteRepository
 from infrastructure.common.base_entities.singleton import OnlyContainer, Singleton
 
 
@@ -19,12 +18,12 @@ class Container(Singleton):
         echo=settings.POSTGRES.echo,
     )
 
-    template_read_manager = OnlyContainer(
-        TemplateReadRepository,
+    artist_read_repository = OnlyContainer(
+        ArtistReadRepository,
         session_adapter=alchemy_manager(),
     )
 
-    template_write_manager = OnlyContainer(
-        TemplateWriteRepository,
+    artist_write_repository = OnlyContainer(
+        ArtistWriteRepository,
         session_adapter=alchemy_manager(),
     )
