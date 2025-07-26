@@ -1,19 +1,19 @@
-from typing import Any, Optional, Union
+from typing import Any, Generic, Iterable, Type
 from uuid import UUID
 
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import async_sessionmaker
 
-from adapters.database.alchemy_adapter import AlchemyAdapter
+from infrastructure.adapters.database.alchemy_adapter import AlchemyAdapter
+from infrastructure.common.base_entities.typevars import table
 from infrastructure.common.interfaces.repository_interfaces import (
     AbstractReadRepository,
 )
-from infrastructure.database.models import Base
 
 
-class ReadRepository(AbstractReadRepository):
+class ReadRepository(AbstractReadRepository, Generic[table]):
 
-    def __init__(self, session_adapter: AlchemyAdapter, model: type[Base]) -> None:
+    def __init__(self, session_adapter: AlchemyAdapter, model: Type[table]) -> None:
         self._model = model
         self._session: async_sessionmaker = session_adapter.autocommit_session
 
@@ -23,21 +23,21 @@ class ReadRepository(AbstractReadRepository):
             query = filters.filter(query)
         return query
 
-    def __get_query(self) -> select:
+    def _get_query(self) -> select:
         query = select(self._model)
         return query
 
-    async def get_item(self, uuid: Union[str, UUID]) -> Optional[Any]:
+    async def get_item(self, uuid: str | UUID) -> table | None:
         async with self._session() as session:
-            stmt = self.__get_query().where(self._model.uuid == uuid)
+            stmt = self._get_query().where(self._model.uuid == uuid)
             answer = await session.execute(stmt)
         return answer.unique().scalar_one_or_none()
 
     async def find(
         self,
         filters: Any = None,
-    ) -> Union[list, select]:
-        query = self.__get_query()
+    ) -> Iterable[table]:
+        query = self._get_query()
         query = self.__set_filter(query, filters)
         async with self._session() as session:
             result = await session.execute(query)

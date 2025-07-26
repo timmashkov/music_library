@@ -3,6 +3,7 @@ from uuid import UUID
 
 import pydantic
 
+from domain.album.entities.model import AlbumResultData
 from infrastructure.common.base_entities.patched_filter import PatchedFilter
 from infrastructure.database.models import Artist
 
@@ -24,6 +25,9 @@ class ArtistResultData(ArtistIncomingData):
     )
     updated_at: datetime.datetime = pydantic.Field(
         description=Artist.updated_at.comment
+    )
+    albums: list[AlbumResultData] | None = pydantic.Field(
+        default_factory=list, description="Artist's albums"
     )
 
 

@@ -1,4 +1,3 @@
-from adapters.database.alchemy_adapter import AlchemyAdapter
 from application.config import settings
 from domain.album.repositories.read_repository import AlbumReadRepository
 from domain.album.repositories.write_repository import AlbumWriteRepository
@@ -6,6 +5,7 @@ from domain.artist.repositories.read_repository import ArtistReadRepository
 from domain.artist.repositories.write_repository import ArtistWriteRepository
 from domain.track.repositories.read_repository import TrackReadRepository
 from domain.track.repositories.write_repository import TrackWriteRepository
+from infrastructure.adapters.database.alchemy_adapter import AlchemyAdapter
 from infrastructure.common.base_entities.singleton import OnlyContainer, Singleton
 
 
