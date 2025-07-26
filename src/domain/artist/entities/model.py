@@ -2,6 +2,7 @@ import datetime
 from uuid import UUID
 
 import pydantic
+
 from infrastructure.common.base_entities.patched_filter import PatchedFilter
 from infrastructure.database.models import Artist
 

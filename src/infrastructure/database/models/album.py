@@ -1,12 +1,14 @@
-import uuid
 import typing
+import uuid
+
+from sqlalchemy import ForeignKey, String, Text
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from infrastructure.database.models.base import Base
-from sqlalchemy import String, Text, ForeignKey
-from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 if typing.TYPE_CHECKING:
     from infrastructure.database.models import Artist
+
 
 class Album(Base):
 
@@ -17,7 +19,12 @@ class Album(Base):
     cover_url: Mapped[str | None] = mapped_column(
         String, comment="Cover's url in minio"
     )
-    artist_uuid: Mapped[uuid.UUID] = mapped_column(ForeignKey("artists.uuid"), unique=True, nullable=False, index=True, comment="Artist's unique id")
+    artist_uuid: Mapped[uuid.UUID] = mapped_column(
+        ForeignKey("artists.uuid"),
+        nullable=False,
+        index=True,
+        comment="Artist's unique id",
+    )
 
     artist: Mapped["Artist"] = relationship(
         "Artist",

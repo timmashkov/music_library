@@ -1,10 +1,13 @@
 import typing
-from infrastructure.database.models.base import Base
+
 from sqlalchemy import String, Text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
+from infrastructure.database.models.base import Base
+
 if typing.TYPE_CHECKING:
     from infrastructure.database.models import Album
+
 
 class Artist(Base):
 
