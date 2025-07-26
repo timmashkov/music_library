@@ -4,6 +4,8 @@ from domain.album.repositories.read_repository import AlbumReadRepository
 from domain.album.repositories.write_repository import AlbumWriteRepository
 from domain.artist.repositories.read_repository import ArtistReadRepository
 from domain.artist.repositories.write_repository import ArtistWriteRepository
+from domain.track.repositories.read_repository import TrackReadRepository
+from domain.track.repositories.write_repository import TrackWriteRepository
 from infrastructure.common.base_entities.singleton import OnlyContainer, Singleton
 
 
@@ -37,5 +39,15 @@ class Container(Singleton):
 
     album_write_repository = OnlyContainer(
         AlbumWriteRepository,
+        session_adapter=alchemy_manager(),
+    )
+
+    track_read_repository = OnlyContainer(
+        TrackReadRepository,
+        session_adapter=alchemy_manager(),
+    )
+
+    track_write_repository = OnlyContainer(
+        TrackWriteRepository,
         session_adapter=alchemy_manager(),
     )
