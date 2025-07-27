@@ -4,6 +4,7 @@ from uuid import UUID
 
 import pydantic
 
+from domain.track.entities.model import TrackResultData
 from infrastructure.common.base_entities.patched_filter import PatchedFilter
 from infrastructure.database.models import Album
 
@@ -28,6 +29,9 @@ class AlbumResultData(AlbumIncomingData):
     uuid: UUID = pydantic.Field(description=Album.uuid.comment)
     created_at: datetime.datetime = pydantic.Field(description=Album.created_at.comment)
     updated_at: datetime.datetime = pydantic.Field(description=Album.updated_at.comment)
+    tracks: list[TrackResultData] | None = pydantic.Field(
+        default_factory=list, description="Album's tracks"
+    )
 
 
 class AlbumFilter(PatchedFilter):

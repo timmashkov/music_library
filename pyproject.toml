@@ -1,6 +1,6 @@
 [project]
 name = "music-library-service"
-version = "0.0.5"
+version = "0.0.6"
 description = "Music library service"
 authors = [
     {name = "timmashkov",email = "bodomizer@yandex.ru"}
