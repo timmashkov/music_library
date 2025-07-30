@@ -13,6 +13,8 @@ class ArtistReadRepository(ReadRepository[Artist]):
 
     def _get_query(self) -> select:
         query = select(self._model).options(
-            joinedload(self._model.albums).joinedload(Album.tracks)
+            joinedload(self._model.albums).joinedload(
+                Album.tracks
+            )  # TODO: add optional join
         )
         return query
