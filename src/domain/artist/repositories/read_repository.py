@@ -1,8 +1,8 @@
 from sqlalchemy import select
-from sqlalchemy.orm import joinedload
+from sqlalchemy.orm import joinedload, with_expression
 
-from infrastructure.adapters.database.alchemy_adapter import AlchemyAdapter
-from infrastructure.database.models import Album, Artist
+from infrastructure.adapters.alchemy_adapter import AlchemyAdapter
+from infrastructure.database.models import Album, Artist, ArtistAlbumsCount
 from infrastructure.database.repositories.read_repository import ReadRepository
 
 
@@ -16,5 +16,10 @@ class ArtistReadRepository(ReadRepository[Artist]):
             joinedload(self._model.albums).joinedload(
                 Album.tracks
             )  # TODO: add optional join
+        )
+        query = query.outerjoin(
+            ArtistAlbumsCount, self._model.uuid == ArtistAlbumsCount.artist_uuid
+        ).options(
+            with_expression(self._model.albums_count, ArtistAlbumsCount.album_count)
         )
         return query

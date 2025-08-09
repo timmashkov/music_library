@@ -1,7 +1,7 @@
 import typing
 
 from sqlalchemy import String, Text
-from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy.orm import Mapped, mapped_column, query_expression, relationship
 
 from infrastructure.database.models.base import Base
 
@@ -18,6 +18,8 @@ class Artist(Base):
     image_url: Mapped[str | None] = mapped_column(
         String, comment="Image's url in minio"
     )
+
+    albums_count: Mapped[int] = query_expression()
 
     albums: Mapped[typing.List["Album"]] = relationship(
         "Album",

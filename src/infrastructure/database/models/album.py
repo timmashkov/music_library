@@ -3,7 +3,7 @@ import uuid
 from datetime import datetime
 
 from sqlalchemy import DateTime, ForeignKey, String, Text
-from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy.orm import Mapped, mapped_column, query_expression, relationship
 
 from infrastructure.database.models.base import Base
 
@@ -35,6 +35,8 @@ class Album(Base):
         index=True,
         comment="Artist's genre id",
     )
+
+    tracks_count: Mapped[int] = query_expression()
 
     artist: Mapped["Artist"] = relationship(
         "Artist",

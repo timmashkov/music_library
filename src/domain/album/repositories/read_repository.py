@@ -1,7 +1,7 @@
 from sqlalchemy import select
 from sqlalchemy.orm import joinedload
 
-from infrastructure.adapters.database.alchemy_adapter import AlchemyAdapter
+from infrastructure.adapters.alchemy_adapter import AlchemyAdapter
 from infrastructure.database.models import Album
 from infrastructure.database.repositories.read_repository import ReadRepository
 
