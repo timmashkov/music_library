@@ -4,7 +4,7 @@ from uuid import UUID
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import async_sessionmaker
 
-from infrastructure.adapters.database.alchemy_adapter import AlchemyAdapter
+from infrastructure.adapters.alchemy_adapter import AlchemyAdapter
 from infrastructure.common.base_entities.typevars import table
 from infrastructure.common.interfaces.repository_interfaces import (
     AbstractReadRepository,

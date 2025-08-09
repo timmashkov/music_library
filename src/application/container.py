@@ -8,13 +8,13 @@ from domain.artist.repositories.read_repository import ArtistReadRepository
 from domain.artist.repositories.write_repository import ArtistWriteRepository
 from domain.track.repositories.read_repository import TrackReadRepository
 from domain.track.repositories.write_repository import TrackWriteRepository
-from infrastructure.adapters.database.alchemy_adapter import AlchemyAdapter
+from infrastructure.adapters.alchemy_adapter import AlchemyAdapter
 from infrastructure.common.base_entities.singleton import OnlyContainer, Singleton
 
 
 class Container(Singleton):
 
-    alchemy_manager = OnlyContainer(
+    alchemy_manager: AlchemyAdapter = OnlyContainer(
         AlchemyAdapter,
         dialect=settings.POSTGRES.dialect,
         host=settings.POSTGRES.host,
@@ -25,49 +25,49 @@ class Container(Singleton):
         echo=settings.POSTGRES.echo,
     )
 
-    artist_read_repository = OnlyContainer(
+    artist_read_repository: ArtistReadRepository = OnlyContainer(
         ArtistReadRepository,
         session_adapter=alchemy_manager(),
     )
 
-    artist_write_repository = OnlyContainer(
+    artist_write_repository: ArtistWriteRepository = OnlyContainer(
         ArtistWriteRepository,
         session_adapter=alchemy_manager(),
     )
 
-    album_read_repository = OnlyContainer(
+    album_read_repository: AlbumReadRepository = OnlyContainer(
         AlbumReadRepository,
         session_adapter=alchemy_manager(),
     )
 
-    album_write_repository = OnlyContainer(
+    album_write_repository: AlbumWriteRepository = OnlyContainer(
         AlbumWriteRepository,
         session_adapter=alchemy_manager(),
     )
 
-    track_read_repository = OnlyContainer(
+    track_read_repository: TrackReadRepository = OnlyContainer(
         TrackReadRepository,
         session_adapter=alchemy_manager(),
     )
 
-    track_write_repository = OnlyContainer(
+    track_write_repository: TrackWriteRepository = OnlyContainer(
         TrackWriteRepository,
         session_adapter=alchemy_manager(),
     )
 
-    artist_service = OnlyContainer(
+    artist_service: ArtistUseCase = OnlyContainer(
         ArtistUseCase,
         read_repository=artist_read_repository(),
         write_repository=artist_write_repository(),
     )
 
-    album_service = OnlyContainer(
+    album_service: AlbumUseCase = OnlyContainer(
         AlbumUseCase,
         read_repository=album_read_repository(),
         write_repository=artist_write_repository(),
     )
 
-    track_service = OnlyContainer(
+    track_service: TrackUseCase = OnlyContainer(
         TrackUseCase,
         read_repository=track_read_repository(),
         write_repository=track_write_repository(),

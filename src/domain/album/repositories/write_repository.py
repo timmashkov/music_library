@@ -1,4 +1,4 @@
-from infrastructure.adapters.database.alchemy_adapter import AlchemyAdapter
+from infrastructure.adapters.alchemy_adapter import AlchemyAdapter
 from infrastructure.database.models import Album
 from infrastructure.database.repositories.write_repository import WriteRepository
 

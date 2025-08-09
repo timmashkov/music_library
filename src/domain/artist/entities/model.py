@@ -29,6 +29,7 @@ class ArtistResultData(ArtistIncomingData):
     albums: list[AlbumResultData] | None = pydantic.Field(
         default_factory=list, description="Artist's albums"
     )
+    albums_count: int | None
 
 
 class ArtistFilter(PatchedFilter):
